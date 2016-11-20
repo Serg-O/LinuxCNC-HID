@@ -1,0 +1,62 @@
+LABCENTER PROTEUS TOOL INFORMATION FILE
+=======================================
+
+In case of difficulty, please e-mail support@labcenter.co.uk
+
+Tool set up for Proteus layout 'LinuxCNC-HID-3mod-inp.pdsprj'.
+CADCAM generated at 21:46:45 on 20 но€бр€ 2016 г..
+
+File List
+---------
+Top Copper              : LinuxCNC-HID-inp - CADCAM Top Copper.TXT
+Bottom Copper           : LinuxCNC-HID-inp - CADCAM Bottom Copper.TXT
+Top Silk Screen         : LinuxCNC-HID-inp - CADCAM Top Silk Screen.TXT
+Top Solder Resist       : LinuxCNC-HID-inp - CADCAM Top Solder Resist.TXT
+Bottom Solder Resist    : LinuxCNC-HID-inp - CADCAM Bottom Solder Resist.TXT
+Top SMT Paste Mask      : LinuxCNC-HID-inp - CADCAM Top SMT Paste Mask.TXT
+Mechanical 1            : LinuxCNC-HID-inp - CADCAM Mechanical 1.TXT
+Drill                   : LinuxCNC-HID-inp - CADCAM Drill.TXT
+
+Photoplotter Setup
+------------------
+Format: RS274X, ASCII, 2.4, imperial, absolute, eob=*, LZO
+Notes:  D=Diameter, S=Side, W=Width, H=Height, C=Chamfer
+
+D10	CIRCLE  D=10th                                                            DRAW
+D11	CIRCLE  D=20th                                                            DRAW
+D12	CIRCLE  D=15th                                                            DRAW
+D13	CIRCLE  D=50th                                                            FLASH
+D14	CIRCLE  D=40th                                                            FLASH
+D15	CIRCLE  D=30th                                                            FLASH
+D16	CIRCLE  D=2.5th                                                           DRAW
+D17	SQUARE  S=90th                                                            FLASH
+D18	RECT    W=50th                H=40th                                      FLASH
+D19	RECT    W=40th                H=50th                                      FLASH
+D70	RECT    W=35th                H=40th                                      FLASH
+D71	RECT    W=80th                H=25th                                      FLASH
+D20	CIRCLE  D=196.8th                                                         FLASH
+D21	CIRCLE  D=60th                                                            FLASH
+D22	CIRCLE  D=8th                                                             DRAW
+D23	CIRCLE  D=6th                                                             DRAW
+D24	CIRCLE  D=70th                                                            FLASH
+D25	SQUARE  S=110th                                                           FLASH
+D26	RECT    W=70th                H=60th                                      FLASH
+D27	RECT    W=60th                H=70th                                      FLASH
+D28	RECT    W=55th                H=60th                                      FLASH
+D29	RECT    W=100th               H=45th                                      FLASH
+D72	CIRCLE  D=216.8th                                                         FLASH
+D73	CIRCLE  D=80th                                                            FLASH
+
+NC Drill Setup
+--------------
+Format: ASCII, 2.4, imperial, absolute, eob=<CR><LF>, no zero suppression.
+Notes:  Tool sizes are diameters. Layer sets are in brackets - 0=TOP, 15=BOTTOM, 1-14=INNER.
+
+T01	20th (0-15)
+T02	15th (0-15)
+T03	50th (0-15)
+T04	129.9th (0-15)
+T05	40th (0-15)
+
+
+[END OF FILE]
