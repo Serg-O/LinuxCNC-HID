@@ -4,7 +4,7 @@
   * Description        : This file contains the common defines of the application
   ******************************************************************************
   *
-  * Copyright (c) 2016 STMicroelectronics International N.V. 
+  * Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -46,7 +46,7 @@
   /* Includes ------------------------------------------------------------------*/
 
 /* USER CODE BEGIN Includes */
-
+#include <stdint.h>
 /* USER CODE END Includes */
 
 /* Private define ------------------------------------------------------------*/
@@ -63,10 +63,16 @@
 #define PO5_GPIO_Port GPIOE
 #define PO6_Pin GPIO_PIN_6
 #define PO6_GPIO_Port GPIOE
-#define INP1_SEL_Pin GPIO_PIN_4
-#define INP1_SEL_GPIO_Port GPIOC
-#define INP2_SEL_Pin GPIO_PIN_5
-#define INP2_SEL_GPIO_Port GPIOC
+#define INP_SEL0_Pin GPIO_PIN_4
+#define INP_SEL0_GPIO_Port GPIOC
+#define INP_SEL1_Pin GPIO_PIN_5
+#define INP_SEL1_GPIO_Port GPIOC
+#define OUT_SEL0_Pin GPIO_PIN_0
+#define OUT_SEL0_GPIO_Port GPIOB
+#define OUT_SEL1_Pin GPIO_PIN_1
+#define OUT_SEL1_GPIO_Port GPIOB
+#define OUT_SEL2_Pin GPIO_PIN_2
+#define OUT_SEL2_GPIO_Port GPIOB
 #define PO7_Pin GPIO_PIN_7
 #define PO7_GPIO_Port GPIOE
 #define PO8_Pin GPIO_PIN_8
@@ -101,8 +107,8 @@
 #define PI14_GPIO_Port GPIOD
 #define PI15_Pin GPIO_PIN_15
 #define PI15_GPIO_Port GPIOD
-#define INP3_SEL_Pin GPIO_PIN_6
-#define INP3_SEL_GPIO_Port GPIOC
+#define INP_SEL2_Pin GPIO_PIN_6
+#define INP_SEL2_GPIO_Port GPIOC
 #define PI0_Pin GPIO_PIN_0
 #define PI0_GPIO_Port GPIOD
 #define PI1_Pin GPIO_PIN_1
@@ -119,12 +125,22 @@
 #define PI6_GPIO_Port GPIOD
 #define PI7_Pin GPIO_PIN_7
 #define PI7_GPIO_Port GPIOD
+#define SPI1_SCB_Pin GPIO_PIN_4
+#define SPI1_SCB_GPIO_Port GPIOB
 #define PO0_Pin GPIO_PIN_0
 #define PO0_GPIO_Port GPIOE
 #define PO1_Pin GPIO_PIN_1
 #define PO1_GPIO_Port GPIOE
 /* USER CODE BEGIN Private defines */
 #define ADC_BUF_SIZE 10
+#define INPPin_MAX_BOARD 4
+#define INPPin_PIN_PER_CHIP 8
+#define INPPin_CHIP_PER_BOARD 2
+#define INPPin_PIN_PER_BOARD INPPin_PIN_PER_CHIP*INPPin_CHIP_PER_BOARD
+
+#define OUTPin_MAX_BOARD 4
+#define OUTPin_CHIP_PER_BOARD 2
+#define OUTPin_MAX_CHIPS OUTPin_MAX_BOARD*OUTPin_CHIP_PER_BOARD
 
 #define USB_TX_Buffer_id (USB_TX_Buffer[0])
 #define USB_TX_Buffer_data (&USB_TX_Buffer[1])
@@ -132,6 +148,82 @@
 #define USB_TX_Buffer_short(i) (*((uint16_t*)&USB_TX_Buffer[1+i*2]))
 #define USB_TX_Buffer_word(i) (*((uint32_t*)&USB_TX_Buffer[1+i*4]))
 
+#ifdef INP_SEL0_Pin
+#define INP_SEL0 INP_SEL0_GPIO_Port,INP_SEL0_Pin
+#endif
+#ifdef INP_SEL1_Pin
+#define INP_SEL1 INP_SEL1_GPIO_Port,INP_SEL1_Pin
+#endif
+#ifdef INP_SEL2_Pin
+#define INP_SEL2 INP_SEL2_GPIO_Port,INP_SEL2_Pin
+#endif
+
+#ifdef OUT_SEL0_Pin
+#define OUT_SEL0 OUT_SEL0_GPIO_Port,OUT_SEL0_Pin
+#endif
+#ifdef OUT_SEL1_Pin
+#define OUT_SEL1 OUT_SEL1_GPIO_Port,OUT_SEL1_Pin
+#endif
+#ifdef OUT_SEL2_Pin
+#define OUT_SEL2 OUT_SEL2_GPIO_Port,OUT_SEL2_Pin
+#endif
+#ifdef SPI1_SCB_Pin
+#define SPI1_SCB SPI1_SCB_GPIO_Port,SPI1_SCB_Pin
+#endif
+
+
+
+typedef union {
+  uint16_t data;
+  struct {
+    uint16_t out:8;
+    uint16_t diag:8;
+  };
+  struct {
+    uint16_t out1:1;
+    uint16_t out2:1;
+    uint16_t out3:1;
+    uint16_t out4:1;
+    uint16_t out5:1;
+    uint16_t out6:1;
+    uint16_t out7:1;
+    uint16_t out8:1;
+    uint16_t diag1:1;
+    uint16_t diag2:1;
+    uint16_t diag3:1;
+    uint16_t diag4:1;
+    uint16_t diag5:1;
+    uint16_t diag6:1;
+    uint16_t diag7:1;
+    uint16_t diag8:1;
+  };
+} OutCtl_t;
+
+typedef union {
+  uint16_t data;
+  struct {
+    uint16_t termwarn:1;
+    uint16_t out1:1;
+    uint16_t out2:1;
+    uint16_t out3:1;
+    uint16_t out4:1;
+    uint16_t out5:1;
+    uint16_t out6:1;
+    uint16_t out7:1;
+    uint16_t out8:1;
+    uint16_t in5:1;
+    uint16_t in6:1;
+    uint16_t in7:1;
+    uint16_t in8:1;
+    uint16_t none:2;
+    uint16_t power:1;
+  };
+} OutStat_t;
+
+extern uint8_t USB_RX_Buffer[HID_INBUF_SIZE];
+extern uint8_t InpPinDataReady, OutPinDataReady;
+extern uint8_t OutPinData[OUTPin_MAX_CHIPS];
+  
 /* USER CODE END Private defines */
 
 /**

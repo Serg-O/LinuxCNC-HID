@@ -5,7 +5,7 @@
   * @brief          : This file implements the USB Device descriptors
   ******************************************************************************
   *
-  * Copyright (c) 2016 STMicroelectronics International N.V. 
+  * Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -66,14 +66,15 @@
 /** @defgroup USBD_DESC_Private_Defines
   * @{
   */ 
-#define USBD_VID     0x1209
+#define USBD_VID     1155
 #define USBD_LANGID_STRING     1033
-#define USBD_MANUFACTURER_STRING     "Serg Oskin"
-#define USBD_PID_FS     0xaa00
-#define USBD_PRODUCT_STRING_FS     "LinuxCNC-HID"
-#define USBD_SERIALNUMBER_STRING_FS     "000000000001"
+#define USBD_MANUFACTURER_STRING     "STMicroelectronics"
+#define USBD_PID_FS     22352
+#define USBD_PRODUCT_STRING_FS     "STM32 Custom Human interface"
+#define USBD_SERIALNUMBER_STRING_FS     "00000000001A"
 #define USBD_CONFIGURATION_STRING_FS     "Custom HID Config"
 #define USBD_INTERFACE_STRING_FS     "Custom HID Interface"
+
 
 /* USER CODE BEGIN 0 */
 

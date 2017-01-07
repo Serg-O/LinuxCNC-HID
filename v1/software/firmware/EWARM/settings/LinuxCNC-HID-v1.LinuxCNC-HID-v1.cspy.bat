@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\common\bin\cspybat" -f "W:\Users\serg\Documents\wrk\LinuxCNC-HID\LinuxCNC-HID-v1\EWARM\settings\LinuxCNC-HID-v1.LinuxCNC-HID-v1.general.xcl" --backend -f "W:\Users\serg\Documents\wrk\LinuxCNC-HID\LinuxCNC-HID-v1\EWARM\settings\LinuxCNC-HID-v1.LinuxCNC-HID-v1.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\common\bin\cspybat" -f "W:\Users\serg\Documents\wrk\LinuxCNC-HID\v1\LinuxCNC-HID-v1\EWARM\settings\LinuxCNC-HID-v1.LinuxCNC-HID-v1.general.xcl" --backend -f "W:\Users\serg\Documents\wrk\LinuxCNC-HID\v1\LinuxCNC-HID-v1\EWARM\settings\LinuxCNC-HID-v1.LinuxCNC-HID-v1.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\common\bin\cspybat" -f "W:\Users\serg\Documents\wrk\LinuxCNC-HID\LinuxCNC-HID-v1\EWARM\settings\LinuxCNC-HID-v1.LinuxCNC-HID-v1.general.xcl" "--debug_file=%~1" --backend -f "W:\Users\serg\Documents\wrk\LinuxCNC-HID\LinuxCNC-HID-v1\EWARM\settings\LinuxCNC-HID-v1.LinuxCNC-HID-v1.driver.xcl" 
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.3\common\bin\cspybat" -f "W:\Users\serg\Documents\wrk\LinuxCNC-HID\v1\LinuxCNC-HID-v1\EWARM\settings\LinuxCNC-HID-v1.LinuxCNC-HID-v1.general.xcl" "--debug_file=%~1" --backend -f "W:\Users\serg\Documents\wrk\LinuxCNC-HID\v1\LinuxCNC-HID-v1\EWARM\settings\LinuxCNC-HID-v1.LinuxCNC-HID-v1.driver.xcl" 
 
 @echo off 
 :end

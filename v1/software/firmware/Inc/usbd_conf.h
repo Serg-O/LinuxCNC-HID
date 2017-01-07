@@ -5,7 +5,7 @@
   * @brief          : Header for usbd_conf file.
   ******************************************************************************
   *
-  * Copyright (c) 2016 STMicroelectronics International N.V. 
+  * Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -83,7 +83,7 @@
 /*---------- -----------*/
 #define USBD_CUSTOMHID_OUTREPORT_BUF_SIZE     64
 /*---------- -----------*/
-#define USBD_CUSTOM_HID_REPORT_DESC_SIZE     121
+#define USBD_CUSTOM_HID_REPORT_DESC_SIZE     183
 /****************************************/
 /* #define for FS and HS identification */
 #define DEVICE_FS 		0

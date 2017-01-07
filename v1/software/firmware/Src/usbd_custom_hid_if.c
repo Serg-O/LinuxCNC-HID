@@ -4,7 +4,7 @@
   * @brief          : USB Device Custom HID interface file.
   ******************************************************************************
   *
-  * Copyright (c) 2016 STMicroelectronics International N.V. 
+  * Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -44,6 +44,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_custom_hid_if.h"
 /* USER CODE BEGIN INCLUDE */
+#include "main.h"
 /* USER CODE END INCLUDE */
 /** @addtogroup STM32_USB_OTG_DEVICE_LIBRARY
   * @{
@@ -103,7 +104,7 @@ __ALIGN_BEGIN static uint8_t CUSTOM_HID_ReportDesc_FS[USBD_CUSTOM_HID_REPORT_DES
     0x99, 0x19,                    //   STRING_MAXIMUM(25)
     0x75, 0x10,                    //   REPORT_SIZE (16)
     0x95, 0x10,                    //   REPORT_COUNT (16)
-    0x81, 0x82,                    //   INPUT (Data,Var,Abs,NPrf)
+    0x81, 0xa2,                    //   INPUT (Data,Var,Abs,NPrf,Vol)
                                    // 23
     0x85, 0x02,                    //   REPORT_ID (2)
     0x05, 0x0a,                    //   USAGE_PAGE (Ordinals)
@@ -115,7 +116,7 @@ __ALIGN_BEGIN static uint8_t CUSTOM_HID_ReportDesc_FS[USBD_CUSTOM_HID_REPORT_DES
     0x99, 0x29,                    //   STRING_MAXIMUM(41)
     0x75, 0x10,                    //   REPORT_SIZE (16)
     0x95, 0x10,                    //   REPORT_COUNT (16)
-    0x81, 0x82,                    //   INPUT (Data,Var,Abs,NPrf)
+    0x81, 0xa2,                    //   INPUT (Data,Var,Abs,NPrf,Vol)
                                    // 23
     0x85, 0x03,                    //   REPORT_ID (3)
     0x05, 0x0a,                    //   USAGE_PAGE (Ordinals)
@@ -127,7 +128,7 @@ __ALIGN_BEGIN static uint8_t CUSTOM_HID_ReportDesc_FS[USBD_CUSTOM_HID_REPORT_DES
     0x99, 0x39,                    //   STRING_MAXIMUM(57)
     0x75, 0x10,                    //   REPORT_SIZE (16)
     0x95, 0x10,                    //   REPORT_COUNT (16)
-    0x81, 0x82,                    //   INPUT (Data,Var,Abs,NPrf)
+    0x81, 0xa2,                    //   INPUT (Data,Var,Abs,NPrf,Vol)
                                    // 23
     0x85, 0x04,                    //   REPORT_ID (4)
     0x05, 0x0a,                    //   USAGE_PAGE (Ordinals)
@@ -139,8 +140,39 @@ __ALIGN_BEGIN static uint8_t CUSTOM_HID_ReportDesc_FS[USBD_CUSTOM_HID_REPORT_DES
     0x99, 0x49,                    //   STRING_MAXIMUM(73)
     0x75, 0x10,                    //   REPORT_SIZE (16)
     0x95, 0x10,                    //   REPORT_COUNT (16)
-    0x81, 0x82,                    //   INPUT (Data,Var,Abs,NPrf)
+    0x81, 0xa2,                    //   INPUT (Data,Var,Abs,NPrf,Vol)
                                    // 23
+    0x85, 0x05,                    //   REPORT_ID (5)
+    0x05, 0x0a,                    //   USAGE_PAGE (Ordinals)
+    0x19, 0x01,                    //   USAGE_MINIMUM (Instance 1)
+    0x29, 0x40,                    //   USAGE_MAXIMUM (Instance 64)
+    0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
+    0x25, 0x01,                    //   LOGICAL_MAXIMUM (1)
+    0x89, 0x8a,                    //   STRING_MINIMUM (138)
+    0x99, 0xc9,                    //   STRING_MAXIMUM (201)
+    0x75, 0x01,                    //   REPORT_SIZE (1)
+    0x95, 0x40,                    //   REPORT_COUNT (64)
+    0x81, 0xa2,                    //   INPUT (Data,Var,Abs,NPrf,Vol)
+                                   // 22
+    0x85, 0x06,                    // REPORT_ID (6)
+    0x05, 0x0a,                    // USAGE_PAGE (Ordinals)
+    0x19, 0x01,                    // USAGE_MINIMUM (Instance 1)
+    0x29, 0x02,                    // USAGE_MAXIMUM (Instance 2)
+    0x15, 0x00,                    // LOGICAL_MINIMUM (0)
+    0x27, 0xff, 0xff, 0x00, 0x00,  // LOGICAL_MAXIMUM (65535)
+    0x89, 0xca,                    // STRING_MINIMUM (202)
+    0x99, 0xcb,                    // STRING_MAXIMUM (203)
+    0x75, 0x10,                    // REPORT_SIZE (16)
+    0x95, 0x02,                    // REPORT_COUNT (2)
+    0x81, 0xa2,                    // INPUT (Data,Var,Abs,NPrf,Vol)
+    0x15, 0x00,                    // LOGICAL_MINIMUM (0)
+    0x26, 0xff, 0x00,              // LOGICAL_MAXIMUM (255)
+    0x89, 0xcc,                    // STRING_MINIMUM (204)
+    0x99, 0xcd,                    // STRING_MAXIMUM (205)
+    0x75, 0x08,                    // REPORT_SIZE (8)
+    0x95, 0x02,                    // REPORT_COUNT (2)
+    0x81, 0xa2,                    // INPUT (Data,Var,Abs,NPrf,Vol)
+                                   // 40
     0x85, 0x0a,                    //   REPORT_ID (10)
     0x05, 0x09,                    //   USAGE_PAGE (Button)
     0x19, 0x01,                    //   USAGE_MINIMUM (Button 1)
@@ -228,6 +260,13 @@ static int8_t CUSTOM_HID_DeInit_FS(void)
 static int8_t CUSTOM_HID_OutEvent_FS  (uint8_t event_idx, uint8_t state)
 { 
   /* USER CODE BEGIN 6 */ 
+  switch (((USBD_CUSTOM_HID_HandleTypeDef *)hUsbDeviceFS.pClassData)->Report_buf[0]) {
+  case 10:
+    OutPinDataReady = 0;
+    memcpy( OutPinData, &((USBD_CUSTOM_HID_HandleTypeDef *)hUsbDeviceFS.pClassData)->Report_buf[1], OUTPin_MAX_CHIPS);
+    OutPinDataReady = 1;
+    break;
+  }
   return (0);
   /* USER CODE END 6 */ 
 }
