@@ -680,11 +680,11 @@ static uint8_t  *USBD_CUSTOM_HID_GetUsrStrDesc(USBD_HandleTypeDef *pdev ,uint8_t
   else if(index == 202)
     strcpy(buf, "mpg.0.16bit");
   else if(index == 203)
-    strcpy(buf, "mpg.0.16bit");
+    strcpy(buf, "mpg.1.16bit");
   else if(index == 204)
     strcpy(buf, "mpg.0.8bit");
   else if(index == 205)
-    strcpy(buf, "mpg.0.8bit");
+    strcpy(buf, "mpg.1.8bit");
   else
     sprintf(buf, "unnamed-%02i", index);
   USBD_GetString ((uint8_t*)buf, USBD_MyStrDesc, length);
@@ -764,6 +764,8 @@ void StartADCScanTask(void const * argument)
   /* Infinite loop */
   for(;;)
   {
+    for (bd = 0; bd < INPPin_MAX_BOARD; bd++)
+      InpPinDataBit[bd] = 0;
     for (pn = 0; pn < INPPin_PIN_PER_CHIP; pn++) {
       HAL_GPIO_WritePin(INP_SEL0_GPIO_Port, INP_SEL0_Pin, (GPIO_PinState)(PinMap[pn] & 0x1));
       HAL_GPIO_WritePin(INP_SEL1_GPIO_Port, INP_SEL1_Pin, (GPIO_PinState)(PinMap[pn] & 0x2));
@@ -783,7 +785,7 @@ void StartADCScanTask(void const * argument)
       for (bd = 0; bd < INPPin_MAX_BOARD; bd++)
         for (ch = 0; ch < INPPin_CHIP_PER_BOARD; ch++) {
           InpPinData[bd][ch * INPPin_PIN_PER_CHIP + pn] = ADC_Value[bd * INPPin_CHIP_PER_BOARD + ch];
-          InpPinDataBit[bd] = ((ADC_Value[bd * INPPin_CHIP_PER_BOARD + ch] < 2048) ? 0 : 1) << (ch * INPPin_PIN_PER_CHIP + pn);
+          InpPinDataBit[bd] |= ((ADC_Value[bd * INPPin_CHIP_PER_BOARD + ch] < 2048) ? 0 : 1) << (ch * INPPin_PIN_PER_CHIP + pn);
         }
       InpPinDataReady = 1;
     }
