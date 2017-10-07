@@ -4,7 +4,7 @@ LABCENTER PROTEUS TOOL INFORMATION FILE
 In case of difficulty, please e-mail support@labcenter.co.uk
 
 Tool set up for Proteus layout 'LinuxCNC-HID-3mod-out.pdsprj'.
-CADCAM generated at 21:47:13 on 20 но€бр€ 2016 г..
+CADCAM generated at 1:18:55 on 8 окт€бр€ 2017 г..
 
 File List
 ---------
@@ -22,25 +22,25 @@ Photoplotter Setup
 Format: RS274X, ASCII, 2.4, imperial, absolute, eob=*, LZO
 Notes:  D=Diameter, S=Side, W=Width, H=Height, C=Chamfer
 
-D10	CIRCLE  D=15th                                                            DRAW
-D11	CIRCLE  D=25th                                                            DRAW
-D12	CIRCLE  D=30th                                                            DRAW
-D13	CIRCLE  D=20th                                                            DRAW
-D14	CIRCLE  D=10th                                                            DRAW
+D10	CIRCLE  D=10th                                                            DRAW
+D11	CIRCLE  D=15th                                                            DRAW
+D12	CIRCLE  D=25th                                                            DRAW
+D13	CIRCLE  D=30th                                                            DRAW
+D14	CIRCLE  D=20th                                                            DRAW
 D15	CIRCLE  D=30th                                                            FLASH
-D16	CIRCLE  D=60th                                                            FLASH
-D17	CIRCLE  D=50th                                                            FLASH
-D18	CIRCLE  D=2.5th                                                           DRAW
-D19	SQUARE  S=90th                                                            FLASH
-D70	RECT    W=25th                H=80th                                      FLASH
+D16	CIRCLE  D=50th                                                            FLASH
+D17	CIRCLE  D=2.5th                                                           DRAW
+D18	SQUARE  S=90th                                                            FLASH
+D19	RECT    W=25th                H=80th                                      FLASH
+D70	CIRCLE  D=60th                                                            FLASH
 D71	CIRCLE  D=196.8th                                                         FLASH
 D20	RECT    W=40th                H=50th                                      FLASH
 D21	CIRCLE  D=8th                                                             DRAW
 D22	CIRCLE  D=6th                                                             DRAW
-D23	CIRCLE  D=80th                                                            FLASH
-D24	CIRCLE  D=70th                                                            FLASH
-D25	SQUARE  S=110th                                                           FLASH
-D26	RECT    W=45th                H=100th                                     FLASH
+D23	CIRCLE  D=70th                                                            FLASH
+D24	SQUARE  S=110th                                                           FLASH
+D25	RECT    W=45th                H=100th                                     FLASH
+D26	CIRCLE  D=80th                                                            FLASH
 D27	CIRCLE  D=216.8th                                                         FLASH
 D28	RECT    W=60th                H=70th                                      FLASH
 
